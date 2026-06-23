@@ -4,7 +4,8 @@ launching more map variations on steamdeck
 
 this script helps launch the More Map Variations mod on the Valve steamdeck for nightreign.
 
-first, disable operating system read only mode. 
+first, disable operating system read only mode. this allows us to make the script run and install things to the operating system. 
+
 ``sudo steamos-readonly disable``
 you may need to create a root password with passwd DO NOT FORGET THIS PASSWORD 
 
@@ -22,9 +23,11 @@ now, there's a chance it works just fine from there, but run
 ``me3 --info`` to test, you should see a bunch of data. don't worry about it, if you don't you're going to either need to install it to your path if you want to (unnecessary for this) run it from desktop mode.
 
 however the next steps are most important you can find wherever me3 is installed with this command 
-``which md3`` make sure the output of this states /home/deck/.local/bin/me3 if it does you're golden and can download the mod and place it in your documents folder, that's where I put it and that's where this script expects it. if it's not there be sure to edit the script or the location of the mod. 
+``which me3`` make sure the output of this states /home/deck/.local/bin/me3 if it does you're golden and can download the mod and place it in your documents folder, that's where I put it and that's where this script expects it. if it's not there be sure to edit the script or the location of the mod. 
 
 https://www.nexusmods.com/eldenringnightreign/mods/578
+
+download and extract the folder to your /home/deck/Documents folder
 
 after this download the script, you can place this ANYWHERE on your steamdeck, 
 
