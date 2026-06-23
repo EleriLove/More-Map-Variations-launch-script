@@ -6,6 +6,8 @@ this script helps launch the More Map Variations mod on the Valve steamdeck for 
 
 first, disable operating system read only mode. this allows us to make the script run and install things to the operating system. 
 
+#BE SURE TO RUN ALL COMANDS IN THE KONSOLE TERMINAL IN DESKTOP MODE
+
 ``sudo steamos-readonly disable``
 you may need to create a root password with passwd DO NOT FORGET THIS PASSWORD 
 
