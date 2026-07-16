@@ -50,4 +50,6 @@ MMV 2.1.7 and Weapons Merge Hotfix 1 Update Files
 #
 
 I have confirmed that this hotfix works without any special actions, just drag and drop the hotfix files
+updating to the newest hotfit only requires that you copy the new modfolder over from the hotfix, just like you'd update it normally
+
 
