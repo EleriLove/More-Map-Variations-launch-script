@@ -43,3 +43,11 @@ re enable readonly mode with
 then launch the script from game mode, if it doesn't work I won't be able to help you UNLESS you tell me exactly where the mod was downloaded and extracted to, 
 
 AND show me the output of me3 --info if you can't get to me3 --info I can also help you but I need this information. 
+
+#
+
+MMV 2.1.7 and Weapons Merge Hotfix 1 Update Files
+#
+
+I have confirmed that this hotfix works without any special actions, just drag and drop the hotfix files
+
