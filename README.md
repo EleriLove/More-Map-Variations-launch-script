@@ -1,4 +1,4 @@
-#this script will work on any linux system.... probably...#
+# this script will work on any linux system.... probably... #
 
 to install this script you need to pick a directory you want the mod isntalled in
 the directory needs to be completely empty. 
