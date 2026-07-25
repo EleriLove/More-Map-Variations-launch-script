@@ -1,5 +1,9 @@
+if ! sudo -n true 2>/dev/null; then
+    echo "Sudo requires a password. Please set one with: passwd"
+    exit 1
+fi
 if grep -q '^ID=steamos$' /etc/os-release; then
-    sudo -n steamos-readonly disable
+    sudo steamos-readonly disable
 fi
 prog_dir=$(find ~ -name "launch_nightreign.sh" 2>/dev/null)
 echo "downloading and installing me3..."
