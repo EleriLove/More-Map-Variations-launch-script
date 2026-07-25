@@ -12,7 +12,7 @@ if ! echo $PATH |grep "${HOME}/.local/bin";  then
     printf 'export PATH="$PATH:/home/deck/.local/bin"\n' >> ${HOME}/.bash_profile
 fi
 echo "install done."
-cd "${1}" |exit 1
+cd "${1}" || exit 1
 git clone https://github.com/Daybreak-Team/MMV-Launcher "${1}"
 echo "mod installed"
 cp "${prog_dir}" "${1}"
