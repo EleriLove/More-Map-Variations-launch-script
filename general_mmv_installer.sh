@@ -15,9 +15,10 @@ echo "install done."
 cd "${1}" || exit 1
 git clone https://github.com/Daybreak-Team/MMV-Launcher "${1}"
 echo "mod installed"
-cp "${prog_dir}" "${1}"
+cp "${prog_dir}/launch_nightreign.sh" "${1}"
 echo "launcer installed, enjoy your game"
 if grep -q '^ID=steamos$' /etc/os-release; then
     sudo -n steamos-readonly enable
 fi
 exit 1
+rm -rf "${prog_dir}/launch_nightreign.sh"
