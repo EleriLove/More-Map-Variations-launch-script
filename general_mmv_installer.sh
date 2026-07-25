@@ -1,5 +1,5 @@
 if grep -q '^ID=steamos$' /etc/os-release; then
-    sudo steamos-readonly disable
+    sudo -n steamos-readonly disable
 fi
 prog_dir=$(find ~ -name "launch_nightreign.sh" 2>/dev/null)
 echo "downloading and installing me3..."
@@ -15,5 +15,5 @@ cp "${prog_dir}" "${1}"
 echo "launcer installed, enjoy your game"
 sleep 5
 if grep -q '^ID=steamos$' /etc/os-release; then
-    sudo steamos-readonly enable
+    sudo -n steamos-readonly enable
 fi
