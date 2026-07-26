@@ -12,13 +12,17 @@ if ! echo $PATH |grep "${HOME}/.local/bin";  then
     printf 'export PATH="$PATH:/home/deck/.local/bin"\n' >> ${HOME}/.bash_profile
 fi
 echo "install done."
+mkdir -p "${1}" || {
+   echo "mkdir failed"
+   exit 1
+}
 cd "${1}" || exit 1
-git clone https://github.com/Daybreak-Team/MMV-Launcher "${1}"
+git clone "https://github.com/Daybreak-Team/MMV-Launcher" "${1}"
 echo "mod installed"
 cp "${prog_dir}" "${1}"
 echo "launcer installed, enjoy your game"
 if grep -q '^ID=steamos$' /etc/os-release; then
     sudo -n steamos-readonly enable
 fi
-rm -rf "${prog_dir}"
+rm -rf  "${prog_dir}"
 exit 1
