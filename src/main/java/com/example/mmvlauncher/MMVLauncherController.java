@@ -36,9 +36,6 @@ public class MMVLauncherController {
     @FXML
     private MenuItem installOpt1;
 
-    @FXML
-    private MenuItem installOpt2;
-
     //Change Log Menu
     @FXML
     private ScrollPane changeLogScroll;
@@ -72,8 +69,8 @@ public class MMVLauncherController {
         MenuItem selected = (MenuItem) installMenuBtn.getUserData();
         String installOption = (String) selected.getUserData();
 
-        //Run the Bash script with
-        runBash("test_bash.sh", launcherSettings.getInstallPath(), installOption);
+        //Run the installer Bash for MMV mod
+        runBash("general_mmv_installer.sh", launcherSettings.getInstallPath(), installOption);
     }
 
     @FXML
@@ -81,10 +78,8 @@ public class MMVLauncherController {
         //Get the selected menu item on change
         MenuItem selected = (MenuItem) event.getSource();
 
-        //Change the menu buttons display text
+        //Change the menu buttons display text and hidden user data
         installMenuBtn.setText(selected.getText());
-
-        //Change
         installMenuBtn.setUserData(selected);
     }
 

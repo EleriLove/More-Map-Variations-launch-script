@@ -64,11 +64,10 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <SplitMenuButton fx:id="installMenuBtn" mnemonicParsing="false" onAction="#installMod" prefHeight="45.0" prefWidth="130.0" text="Install 1">
+                              <SplitMenuButton fx:id="installMenuBtn" mnemonicParsing="false" onAction="#installMod" prefHeight="45.0" prefWidth="130.0" text="Install">
                                 <items>
                                    <!-- Add userData Manually to MenuItems -->
-                                  <MenuItem fx:id="installOpt1" mnemonicParsing="false" onAction="#installMenuChange" text="Install 1" userData="1"/>
-                                  <MenuItem fx:id="installOpt2" mnemonicParsing="false" onAction="#installMenuChange" text="Install 2" userData="2"/>
+                                  <MenuItem fx:id="installOpt1" mnemonicParsing="false" onAction="#installMenuChange" text="Install" userData="1"/>
                                 </items>
                               </SplitMenuButton>
                            </children>
