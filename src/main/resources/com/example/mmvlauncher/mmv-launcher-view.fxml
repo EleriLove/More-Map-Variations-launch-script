@@ -230,7 +230,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <Button fx:id="settingsConfirmBtn" mnemonicParsing="false" onAction="#saveSettings" text="Apply">
+                        <Button fx:id="settingsConfirmBtn" mnemonicParsing="false" onAction="#saveSettingsMenu" text="Apply">
                            <font>
                               <Font size="14.0" />
                            </font>

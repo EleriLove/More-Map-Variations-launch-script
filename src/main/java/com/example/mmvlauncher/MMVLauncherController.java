@@ -8,8 +8,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,7 +52,11 @@ public class MMVLauncherController {
     @FXML
     private Button settingsConfirmBtn;
 
-    private final String settingsPath = "src/main/resources/com/example/mmvlauncher/settings.json";
+    private final Path settingsPath = Paths.get(
+            System.getProperty("user.home"),
+            ".mmv-launcher",
+            "settings.json"
+    );
 
     private final String changeLogsPath = "";
 
@@ -65,6 +71,10 @@ public class MMVLauncherController {
 
     @FXML
     void installMod(ActionEvent event) {
+        if (launcherSettings == null) {
+            errorWarningLabel.setText("Settings not loaded.");
+            return;
+        }
         //Get the selected data from the instal menu button
         MenuItem selected = (MenuItem) installMenuBtn.getUserData();
         String installOption = (String) selected.getUserData();
@@ -83,21 +93,34 @@ public class MMVLauncherController {
         installMenuBtn.setUserData(selected);
     }
 
+    /**
+     * Runs a Bash script file from the src/main/bash directory
+     * @param scriptFile The file name of the Bash script as a String e.g. "test_bash.sh"
+     * @param posParams Add as many Strings as positional parameters to be used in the Bash script
+     */
     void runBash(String scriptFile, String... posParams) {
         try {
             //Relative path to the bash script file
-            String bashPathStr = "src/main/bash/" + scriptFile;
+            String bashPathStr = "/com/example/mmvlauncher/bash/" + scriptFile;
 
-            //Using Path for error handling
-            Path bashPath = Paths.get(bashPathStr);
+            InputStream bashStream = getClass().getResourceAsStream(bashPathStr);
 
             //Throws an error if the script file doesn't exist in Bash folder
-            if (!bashPath.toFile().exists()) { throw new IllegalArgumentException("File not found"); }
+            if (bashStream == null) {
+                throw new FileNotFoundException("Script not found in resources!");
+            }
+            File tempScript = File.createTempFile("mmv-launcher-script", ".sh");
+            tempScript.deleteOnExit();
+
+            Files.copy(bashStream, tempScript.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            bashStream.close();
+
+            tempScript.setExecutable(true);
 
             //Create command list for Process builder
             List<String> command = new ArrayList<>();
             command.add(launcherSettings.getBashTerminalPath());
-            command.add(bashPathStr);
+            command.add(tempScript.getAbsolutePath());
 
             //Adds all positional parameters
             command.addAll(Arrays.asList(posParams));
@@ -127,53 +150,67 @@ public class MMVLauncherController {
 
     }
 
-    //Save all settings from the settings menu to a config file
+    /** Save all settings from the settings menu to a config file */
     @FXML
-    void saveSettings(ActionEvent event) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
+    void saveSettingsMenu(ActionEvent event) {
         //Applying the changes in the settings menu to launcherSettings
         launcherSettings.setBashTerminalPath(bashPathInput.getText());
         launcherSettings.setInstallPath(gamePathInput.getText());
 
-        //Using file writer with GSON to JSON method to save settings to settings.json
-        try (Writer writer = new FileWriter(settingsPath)){
-            gson.toJson(launcherSettings, writer);
+        saveSettingsToFile();
+    }
+
+    void saveSettingsToFile() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try{
+            Files.createDirectories(settingsPath.getParent());
+            //Using file writer with GSON to JSON method to save settings to settings.json
+            try (Writer writer = Files.newBufferedWriter(settingsPath)) {
+                gson.toJson(launcherSettings, writer);
+            }
         } catch (IOException e) {
-            System.err.println("MMVLauncherController saveSettings Error: " + e.getMessage());
+            System.err.println("MMVLauncherController saveSettingsToFile Error: " + e.getMessage());
             errorWarningLabel.setText(e.getMessage());
         }
     }
 
-    //Load settings from a config file
+    /** Load settings from a config file */
     void loadSettings() {
-        try (Reader reader = new FileReader(settingsPath);
-             JsonReader jsonReader = new JsonReader(reader)) {
-            Gson gson = new Gson();
+        try {
+            //Checks if the settings.json exists and if not it creates and initializes a new one
+            if (!Files.exists(settingsPath)) {
+                launcherSettings = new SettingsModel(
+                        "C:\\Program Files\\Git\\git-bash.exe",
+                        "\\path\\"
+                );
+                launcherSettings.logSettings();
+                //Saves the new settings to settings.json
+                saveSettingsToFile();
+            } else {
+                try (Reader reader = Files.newBufferedReader(settingsPath);
+                     JsonReader jsonReader = new JsonReader(reader)) {
+                    Gson gson = new Gson();
 
-            //Gets settings JSON from the file reader
-            JsonObject settingsJson = gson.fromJson(jsonReader, JsonObject.class);
+                    //Gets settings JSON from the file reader
+                    JsonObject settingsJson = gson.fromJson(jsonReader, JsonObject.class);
 
-            //Gets the bash terminal location from the settings JSON and saves it as a local var
-            SettingsModel settings = new SettingsModel(
-                    settingsJson.get("bashTerminalPath").getAsString(),
-                    settingsJson.get("launchPath").getAsString()
-            );
-
-            //Transferring local settings var to a global variable
-            launcherSettings = settings;
-
+                    //Gets the bash terminal location from the settings JSON and saves it to the global launcherSettings var
+                    launcherSettings = new SettingsModel(
+                            settingsJson.get("bashTerminalPath").getAsString(),
+                            settingsJson.get("installPath").getAsString()
+                    );
+                }
+            }
             //Populates Settings menu with current settings
-            bashPathInput.setText(settings.getBashTerminalPath());
-            gamePathInput.setText(settings.getInstallPath());
-
+            bashPathInput.setText(launcherSettings.getBashTerminalPath());
+            gamePathInput.setText(launcherSettings.getInstallPath());
         } catch (Exception e) {
             System.err.println("MMVLauncherController loadSettings Error: " + e.getMessage());
             errorWarningLabel.setText(e.getMessage());
         }
     }
 
-    //Runs on launch
+    /** Runs on launch */
     @FXML
     void initialize() {
 
