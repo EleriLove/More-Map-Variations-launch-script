@@ -9,7 +9,7 @@ prog_dir=$(find ~ -name "launch_nightreign.sh" 2>/dev/null)
 echo "downloading and installing me3..."
 curl --proto '=https' --tlsv1.2 -sSfL https://github.com/garyttierney/me3/releases/download/v0.12.1/installer.sh | sh
 if ! echo $PATH |grep "${HOME}/.local/bin";  then
-    printf 'export PATH="$PATH:/home/deck/.local/bin"\n' >> ${HOME}/.bash_profile
+    export PATH="$PATH:/home/deck/.local/bin"
 fi
 echo "install done."
 mkdir -p "${1}" || {
