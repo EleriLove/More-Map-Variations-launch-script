@@ -1,4 +1,4 @@
-if grep -q '^ID=steamos$' /etc/os-release && ! sudo -n true 2>/dev/null; then
+if grep -q '^ID=steamos$' /etc/os-release  && sudo -n true 2>/dev/null; then
     echo "Sudo requires a password. Please set one with: passwd"
     exit 1
 fi
