@@ -8,4 +8,5 @@ $mod_engine launch \
   --package "${prog_dir}/mod" \
   -g nightreign \
   --savefile "NR0000.co2" \
-  --online true
+  --online true \
+  --disable_arxan true
