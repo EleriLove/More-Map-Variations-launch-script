@@ -16,6 +16,7 @@ if ! command -v git-lfs >/dev/null 2>&1; then
 	git lfs install
     else
         echo "Could not find a supported package manager to install Git LFS."
+	echo "please install it yourself"
         exit 1
     fi
 fi
