@@ -1,10 +1,9 @@
 prog_path=$(/usr/bin/find / -name "launch_nightreign.sh" 2>/dev/null)
 prog_dir=$(/usr/bin/dirname "$prog_path")
-server_redirector=$(/usr/bin/find ${prog_dir} -name "cl_server_redirector.dll" 2>/dev/null)
 mod_engine=$(/usr/bin/which me3)
 $mod_engine launch \
-  --native "${server_redirector}" \
-  --native "${pro_dir}/mod/dll/custom_drop_fxrs.dll" \
+  --native "${prog_dir}/mod/Server Redirector/cl_server_redirector.dll" \
+  --native "${prog_dir}/mod/dll/custom_drop_fxrs.dll" \
   --package "${prog_dir}/mod" \
   -g nightreign \
   --savefile "NR0000.co2" \
