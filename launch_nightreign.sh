@@ -9,7 +9,7 @@ if !grep -q '^ID=steamos$' /etc/os-release; then
       -g nightreign \
       --savefile "NR0000.co2" \
       --online true \
-      --disable_arxan true
+      --disable-arxan true
 else
     prog_dir="${1}"
     ${HOME}/.local/bin/me3 launch \
@@ -19,5 +19,5 @@ else
       -g nightreign \
       --savefile "NR0000.co2" \
       --online true \
-      --disable_arxan true
+      --disable-arxan true
 fi
