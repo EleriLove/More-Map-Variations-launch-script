@@ -20,7 +20,6 @@ if ! command -v git-lfs >/dev/null 2>&1; then
         exit 1
     fi
 fi
-fi
 prog_dir=$(find ~ -name "launch_nightreign.sh" 2>/dev/null)
 echo "downloading and installing me3..."
 curl --proto '=https' --tlsv1.2 -sSfL https://github.com/garyttierney/me3/releases/download/v0.12.1/installer.sh | sh
