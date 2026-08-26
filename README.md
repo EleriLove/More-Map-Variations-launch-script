@@ -21,5 +21,5 @@ once you're in there simply type ``./general_mmv_installer.sh <path to install d
 remember to replace ``<path to install directory>`` with the location of your folder you created earlier.
 if everything worked you should be able to move to the install location in gui and see a mod folder along with a launch_nightreign.sh file, 
 
-if you do, then the script worked! just double lick the launch file and nightreign should boot up. you can add this file to steam if you want to launch via steam like any non steam game. 
+if you do, then the script worked! just double click the launch file and nightreign should boot up. you can add this file to steam if you want to launch via steam like any non steam game. 
  
