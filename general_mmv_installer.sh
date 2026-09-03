@@ -5,21 +5,6 @@ fi
 if grep -q '^ID=steamos$' /etc/os-release; then
     sudo steamos-readonly disable
 fi
-if ! command -v git-lfs >/dev/null 2>&1; then
-    echo "Git LFS is required but is not installed."
-    if command -v apt-get >/dev/null 2>&1; then
-        sudo apt-get update
-        sudo apt-get install -y git-lfs
-	git lfs install
-    elif command -v pacman >/dev/null 2>&1; then
-        sudo pacman -Sy --noconfirm git-lfs
-	git lfs install
-    else
-        echo "Could not find a supported package manager to install Git LFS."
-	echo "please install it yourself"
-        exit 1
-    fi
-fi
 prog_dir=$(find ~ -name "launch_nightreign.sh" 2>/dev/null)
 echo "downloading and installing me3..."
 curl --proto '=https' --tlsv1.2 -sSfL https://github.com/garyttierney/me3/releases/download/v0.12.1/installer.sh | sh
@@ -33,7 +18,13 @@ mkdir -p "${1}" || {
 }
 git clone "https://github.com/Daybreak-Team/MMV-Launcher" "${1}"
 cd "${1}"
-git lfs pull
+cat  "${1}/"*.zip* > "${1}/MMV.zip"
+unzip "${1}/MMV.zip" -d "${1}"
+rm "${1}/"*.zip.*
+mv "${1}/More Map Variations and Weapons Mod Merge 578 2.1.8.3 2026-08-26T22-23Z KXPnhGD30" "${1}/MMV-Files"
+cp "${1}/MMV-Files/"* "${1}"
+rm -rf "${1}/MMV-Files"
+mv "${1}/More Map Variations 2.1.8-hotfix3 & Weapons Mod" "MMV-Files"
 echo "mod installed"
 cp "${prog_dir}" "${1}"
 echo "launcer installed, enjoy your game"
