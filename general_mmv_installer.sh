@@ -31,5 +31,4 @@ echo "launcer installed, enjoy your game"
 if grep -q '^ID=steamos$' /etc/os-release; then
     sudo -n steamos-readonly enable
 fi
-rm -rf  "${prog_dir}"
 exit 1
