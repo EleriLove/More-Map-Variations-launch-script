@@ -6,7 +6,7 @@ the directory needs to be completely empty.
 in order to do this you can use the mkdir command in terminal, or in your gui
 just... make a folder like normal, 
 
-#DO NOT USE SPACES IN DIRECTORY NAMES#
+# DO NOT USE SPACES IN DIRECTORY NAMES
 
 take note of the location of this folder you will need it later.
 
