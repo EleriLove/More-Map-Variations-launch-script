@@ -1,6 +1,4 @@
 if !grep -q '^ID=steamos$' /etc/os-release; then
-    prog_path=$(/usr/bin/find / -name "launch_nightreign.sh" 2>/dev/null)
-    prog_dir=$(/usr/bin/dirname "$prog_path")
     mod_engine=$(/usr/bin/which me3)
     $mod_engine launch \
       --native "${1}/mod/ServerRedirector/cl_server_redirector.dll" \
