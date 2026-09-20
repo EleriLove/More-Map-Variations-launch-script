@@ -21,8 +21,8 @@ cd "${1}"
 cat  "${1}/"*.zip* > "${1}/MMV.zip"
 unzip "${1}/MMV.zip" -d "${1}"
 rm "${1}/"*.zip.*
-mv "${1}/More Map Variations and Weapons Mod Merge 578 2.1.8.3 2026-08-26T22-23Z KXPnhGD30" "${1}/MMV-Files"
-cp "MMV-Files/"* "${1}"
+rm  *.zip
+mv * "MMV-Files"
 echo "mod installed"
 cp "${prog_dir}" "${1}"
 echo "launcer installed, enjoy your game"
