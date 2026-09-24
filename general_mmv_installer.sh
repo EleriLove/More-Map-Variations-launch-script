@@ -25,7 +25,6 @@ rm  *.zip
 mv * "MMV-Files"
 cp "${1}MMV-Files/*" "${1}"
 echo "mod installed"
-cp "${prog_dir}" "${1}"
 echo "launcer installed, enjoy your game"
 if grep -q '^ID=steamos$' /etc/os-release; then
     sudo -n steamos-readonly enable
