@@ -23,7 +23,7 @@ unzip "${1}/MMV.zip" -d "${1}"
 rm "${1}/"*.zip.*
 rm  *.zip
 mv * "MMV-Files"
-cp "${1}/MMV-Files/mod" "${1}"
+cp "${1}/MMV-Files/*" "${1}"
 rm -rf "${1}/MMV-FIles/"
 echo "mod installed"
 cp "${prog_dir}" "${1}"
