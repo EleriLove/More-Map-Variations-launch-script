@@ -180,8 +180,8 @@ public class MMVLauncherController {
             //Checks if the settings.json exists and if not it creates and initializes a new one
             if (!Files.exists(settingsPath)) {
                 launcherSettings = new SettingsModel(
-                        "usr/bin/bash",
-                        "/path/"
+                        "/usr/bin/bash",
+                        "~/Documents/MMV/"
                 );
                 launcherSettings.logSettings();
                 //Saves the new settings to settings.json
