@@ -66,7 +66,7 @@ public class MMVLauncherController {
 
     @FXML
     void launchNightReign(ActionEvent event) {
-        runBash("launch_nightreign.sh", launcherSettings.getInstallPath());
+        runBash("launch_nightreign.sh", false, launcherSettings.getInstallPath());
     }
 
     @FXML
@@ -80,7 +80,7 @@ public class MMVLauncherController {
         String installOption = (String) selected.getUserData();
 
         //Run the installer Bash for MMV mod
-        runBash("general_mmv_installer.sh", launcherSettings.getInstallPath(), installOption);
+        runBash("general_mmv_installer.sh", true, launcherSettings.getInstallPath(), installOption);
     }
 
     @FXML
@@ -98,7 +98,7 @@ public class MMVLauncherController {
      * @param scriptFile The file name of the Bash script as a String e.g. "test_bash.sh"
      * @param posParams Add as many Strings as positional parameters to be used in the Bash script
      */
-    void runBash(String scriptFile, String... posParams) {
+    void runBash(String scriptFile, Boolean permsReq, String... posParams) {
         try {
             //Relative path to the bash script file
             String bashPathStr = "/com/example/mmvlauncher/bash/" + scriptFile;
@@ -119,6 +119,9 @@ public class MMVLauncherController {
 
             //Create command list for Process builder
             List<String> command = new ArrayList<>();
+            if (permsReq) {
+                command.add("pkexec");
+            }
             command.add(launcherSettings.getBashTerminalPath());
             command.add("-i");
             command.add(tempScript.getAbsolutePath());
