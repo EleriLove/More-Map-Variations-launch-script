@@ -120,6 +120,7 @@ public class MMVLauncherController {
             //Create command list for Process builder
             List<String> command = new ArrayList<>();
             command.add(launcherSettings.getBashTerminalPath());
+            command.add("-i");
             command.add(tempScript.getAbsolutePath());
 
             //Adds all positional parameters
@@ -127,6 +128,8 @@ public class MMVLauncherController {
 
             //Initialize ProcessBuilder with the command list
             ProcessBuilder processBuilder = new ProcessBuilder(command);
+
+            processBuilder.inheritIO();
 
             //Start the process
             Process process = processBuilder.start();
@@ -180,8 +183,9 @@ public class MMVLauncherController {
             //Checks if the settings.json exists and if not it creates and initializes a new one
             if (!Files.exists(settingsPath)) {
                 launcherSettings = new SettingsModel(
-                        "/usr/bin/bash",
-                        "~/Documents/MMV/"
+                        //Settings Defaults
+                        /* Bash Terminal Path: */ "/usr/bin/bash",
+                        /* Install Path: */ "~/Documents/MMV/"
                 );
                 launcherSettings.logSettings();
                 //Saves the new settings to settings.json
