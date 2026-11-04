@@ -22,8 +22,6 @@ cat  "${1}/"*.zip* > "${1}/MMV.zip"
 unzip "${1}/MMV.zip" -d "${1}"
 rm "${1}/"*.zip.*
 rm  *.zip
-mv * "MMV-Files"
-cp "${1}MMV-Files/*" "${1}"
 echo "mod installed"
 echo "launcer installed, enjoy your game"
 if grep -q '^ID=steamos$' /etc/os-release; then
