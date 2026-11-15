@@ -1,14 +1,11 @@
 # this script will work on any linux system
 
 to install this script you need to pick a directory you want the mod isntalled in
-the directory needs to be completely empty. 
-
-in order to do this you can use the mkdir command in terminal, or in your gui
-just... make a folder like normal, 
+the directory needs to be completely empty. Do not make this folder the script will do itfor you. 
 
 # DO NOT USE SPACES IN DIRECTORY NAMES
 
-take note of the location of this folder you will need it later.
+take note of the location you want the mod installed in you will need it later.
 
 when you're ready with the location you want
 
